@@ -6,7 +6,9 @@ Built using Express, PostSQL, and Knex
 ---
 ### Get /movies
 This route returns a list of all the movies in the database.
+
 example:
+
   {
     "data": [
       {
