@@ -1,8 +1,7 @@
 const service = require("./reviews.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
-const hasProperties = require("../errors/hasProperties");
-const hasRequiredProperties = hasProperties("content");
 
+// list the valid properties to check/verify when updateing a review
 const VALID_PROPERTIES = [
   "content",
   "score",
@@ -13,6 +12,7 @@ const VALID_PROPERTIES = [
 ];
 
 function hasOnlyValidProperties(req, res, next) {
+  // MIDDLEWARE checks to see if body contains ONLY properties that are expected in reviews
   const methodName = "hasOnlyValidProperties";
   req.log.debug({ __filename, methodName });
   const { data = {} } = req.body;
@@ -32,6 +32,7 @@ function hasOnlyValidProperties(req, res, next) {
 }
 
 async function reviewExists(req, res, next) {
+  // MIDDLEWARE checks to see if a review exists for the given movieId
   const methodName = "reviewExists";
   req.log.debug({ __filename, methodName });
   const reviewId = req.params.movieId;
@@ -69,7 +70,6 @@ module.exports = {
   update: [
     asyncErrorBoundary(reviewExists),
     hasOnlyValidProperties,
-    hasRequiredProperties,
     asyncErrorBoundary(update),
   ],
   delete: [asyncErrorBoundary(reviewExists), asyncErrorBoundary(destroy)],

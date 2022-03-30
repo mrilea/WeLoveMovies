@@ -1,9 +1,8 @@
 const service = require("./movies.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
-// const VALID_PROPERTIES = ["title", "runtime_in_minutes", "rating", "description", "image_url"];
-
 async function movieExists(req, res, next) {
+  // MIDDLEWARE to verify that a movie exists with a matching movieId
   const methodName = "movieExists";
   req.log.debug({ __filename, methodName });
   const movie = await service.read(Number(req.params.movieId));
@@ -12,7 +11,7 @@ async function movieExists(req, res, next) {
     return next();
   }
   next({ status: 404, message: `Movie cannot be found` });
-  req.log.trace({ __filename, methodName, return: true, movie })
+  req.log.trace({ __filename, methodName, return: true, movie });
 }
 
 async function list(req, res, next) {
@@ -33,7 +32,8 @@ async function read(req, res, next) {
 }
 
 async function showingInTheater(req, res, next) {
-  const methodName = "showingInTheater"
+  // returns a list of theaters showing the movie that matches the movieId
+  const methodName = "showingInTheater";
   req.log.debug({ __filename, methodName });
   const movieId = req.params.movieId;
   const data = await service.movieInTheater(movieId);
@@ -42,7 +42,8 @@ async function showingInTheater(req, res, next) {
 }
 
 async function movieReviews(req, res, next) {
-  const methodName = "movieReviews"
+  // returns a list of reviews that match the movie with the movieId
+  const methodName = "movieReviews";
   req.log.debug({ __filename, methodName });
   const movieId = req.params.movieId;
   const data = await service.movieReviews(movieId);

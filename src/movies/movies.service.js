@@ -1,6 +1,7 @@
 const knex = require("../db/connection");
 
 function addCritic(movies) {
+  // add critics to reviews
   return movies.map((movie) => {
     return {
       review_id: movie.review_id,

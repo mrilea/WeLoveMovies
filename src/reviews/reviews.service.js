@@ -8,6 +8,7 @@ const addCriticDetails = mapProperties({
 });
 
 function read(reviewId) {
+  // list reviews for a matching movieId
   return knex("reviews").select("*").where({ review_id: reviewId }).first();
 }
 
@@ -19,6 +20,7 @@ function update(updatedReview) {
 }
 
 function getReviewWithCritic(reviewId) {
+  // returns critic information to a matching review
   return knex("reviews as r")
     .join("critics as c", "c.critic_id", "r.critic_id")
     .select("*")

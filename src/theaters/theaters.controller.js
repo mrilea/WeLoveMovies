@@ -2,6 +2,7 @@ const service = require("./theaters.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function list(req, res, next) {
+  // list all theaters
   const methodName = "list";
   req.log.debug({ __filename, methodName });
 
