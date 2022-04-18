@@ -1,6 +1,6 @@
 # WeLoveMovies
 ---
-A RESTful API built using Express, PostSQL, and Knex for browsing movies, theaters, and reviews.
+A RESTful API built using Express, PostgreSQL, and Knex for browsing movies, theaters, and reviews.
 
 ## API Documentation
 ---
